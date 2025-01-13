@@ -103,7 +103,9 @@ const EditPropertyPage = () => {
 
   return (
     <Box>
-      <h1 style={{ margin: "2rem" }}>Edit Property</h1>
+      <h1 style={{ margin: "2rem" }} className="text-2xl font-bold">
+        Edit Property
+      </h1>
       {getLoading ? (
         <CircularProgress />
       ) : getError ? (

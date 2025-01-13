@@ -82,7 +82,9 @@ const EditUserPage = () => {
 
   return (
     <Box>
-      <h1 style={{ margin: "2rem" }}>{"Edit User"}</h1>
+      <h1 style={{ margin: "2rem" }} className="text-2xl font-bold">
+        {"Edit User"}
+      </h1>
       <form onSubmit={handleFormSubmit}>
         <Box style={{ margin: "2rem" }} gap={"10px"}>
           <TextField

@@ -92,7 +92,9 @@ const AddPropertyPage = () => {
 
   return (
     <Box>
-      <h1 style={{ margin: "2rem" }}>{"Add Property"}</h1>
+      <h1 style={{ margin: "2rem" }} className="text-2xl font-bold">
+        {"Add Property"}
+      </h1>
       <form onSubmit={handleFormSubmit}>
         <Box style={{ margin: "2rem" }} gap={"10px"}>
           {/* User ID Input */}

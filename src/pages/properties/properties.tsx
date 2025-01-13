@@ -30,6 +30,9 @@ const Properties = () => {
 
   return (
     <>
+      <h1 style={{ margin: "2rem" }} className="text-2xl font-bold">
+        {"Properties"}
+      </h1>
       <div className="w-full flex justify-end mb-4">
         <Button
           // Add functionality for the Add button
