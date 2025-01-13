@@ -9,6 +9,7 @@ import Bookings from "./pages/bookings/bookingsPage";
 import AddBooking from "./pages/bookings/addBooking";
 import AddPropertyPage from "./pages/properties/addProperty";
 import Navbar from "./components/navBar";
+import EditPropertyPage from "./pages/properties/editProperty";
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
             <Route
               path="properties/addproperty"
               element={<AddPropertyPage />}
+            />
+            <Route
+              path="properties/editproperty/:id"
+              element={<EditPropertyPage />}
             />
             <Route path="properties/:id" element={<PropertyDetails />} />
             <Route path="users/adduser" element={<AddUserPage />} />

@@ -19,6 +19,7 @@ import { Close } from "@mui/icons-material";
 import { red } from "@mui/material/colors";
 import useCrud from "../../hooks/useCRUD";
 import { baseUrl } from "../../constants";
+import { relative } from "path";
 // import { useTranslation } from "react-i18next";
 // import { ToastContainer } from "react-toastify";
 // import { addItem, addMultipartItem } from "../../network/network";
@@ -192,6 +193,7 @@ const AddUserPage = () => {
               <Box
                 sx={{
                   display: "flex",
+                  position: "relative",
                   alignItems: "start",
                   mt: 2,
                   // position: "relative",
@@ -206,18 +208,19 @@ const AddUserPage = () => {
                     marginInlineStart: "2rem",
                   }}
                 />
-                <IconButton onClick={handleRemoveImage}>
-                  <Close
-                    sx={{
-                      color: "red",
-                      position: "absolute",
-                      right: "-40%",
-                      top: "-20%",
-                      background: "white",
-                      borderRadius: "50%",
-                    }}
-                  />
+                <IconButton
+                  onClick={handleRemoveImage}
+                  sx={{
+                    position: "absolute",
+                    top: "-10%",
+                    right: "-10%",
+                    background: "white",
+                    borderRadius: "50%",
+                  }}
+                >
+                  <Close sx={{ color: "red" }} />
                 </IconButton>
+
                 {/* <IconButton
                     // color="secondary"
                     // sx={{ position: "absolute", right: "-30%", top: "-20%" }}

@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import useCrud from "../../hooks/useCRUD";
-import { userColumns } from "../../mockData/data";
 import { Button } from "@mui/material";
-import Table from "../../components/table";
 import { Card } from "../../components/propertiesCard";
 import { useNavigate } from "react-router";
 

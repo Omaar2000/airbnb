@@ -28,7 +28,7 @@ const EditUserPage = () => {
   const [profile_image, setImage] = useState<File | null>(null);
   const [profile_image_link, setImageLink] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
-  const { post, loading: postLoading } = useCrud();
+  const { postMultipart, loading: postLoading } = useCrud();
   const { get, loading: getLoading, data } = useCrud();
   const navigate = useNavigate();
 
@@ -48,7 +48,8 @@ const EditUserPage = () => {
       setEmail(data.email || "");
       setPhone(data.phone || "");
       setRole(data.role || "");
-      setImageLink(data.profile_image || "");
+      setImageLink(imgBaseURL + "/" + data.profile_image || "");
+      // setImageLink(data.profile_image || "");
     }
   }, [data]);
 
@@ -56,12 +57,9 @@ const EditUserPage = () => {
     e.preventDefault();
     const BODY = { profile_image, name, email, phone, role };
     console.log(`${baseUrl}/users/` + id, BODY);
-    await post(`${baseUrl}/users/` + id, BODY);
+    await postMultipart(`${baseUrl}/users/` + id, BODY);
 
-    // Mock POST request (replace with your POST logic)
-    setIsLoading(true);
     setTimeout(() => {
-      setIsLoading(false);
       navigate("/users");
     }, 500);
   };
@@ -79,6 +77,8 @@ const EditUserPage = () => {
       fileRef.current.value = "";
     }
   };
+
+  if (getLoading) return <>Loading .......</>;
 
   return (
     <Box>
@@ -174,7 +174,12 @@ const EditUserPage = () => {
               ref={fileRef}
             />
             {profile_image ? (
-              <Box display="flex" alignItems="center" mt={2}>
+              <Box
+                display="flex"
+                alignItems="center"
+                mt={2}
+                position={"relative"}
+              >
                 <img
                   src={URL.createObjectURL(profile_image)}
                   alt="Preview"
@@ -184,14 +189,17 @@ const EditUserPage = () => {
                     marginInlineStart: "2rem",
                   }}
                 />
-                <IconButton onClick={handleRemoveImage}>
-                  <Close
-                    sx={{
-                      color: "#333",
-                      background: "white",
-                      borderRadius: "50%",
-                    }}
-                  />
+                <IconButton
+                  onClick={handleRemoveImage}
+                  sx={{
+                    position: "absolute",
+                    top: "-10%",
+                    right: "-10%",
+                    background: "white",
+                    borderRadius: "50%",
+                  }}
+                >
+                  <Close sx={{ color: "red" }} />
                 </IconButton>
               </Box>
             ) : (
@@ -233,12 +241,14 @@ const EditUserPage = () => {
             variant="contained"
             color="success"
             size="large"
-            disabled={isLoading}
+            disabled={postLoading}
             startIcon={
-              isLoading ? <CircularProgress size={20} color="inherit" /> : null
+              postLoading ? (
+                <CircularProgress size={20} color="inherit" />
+              ) : null
             }
           >
-            {isLoading ? "Loading" : "Save"}
+            {postLoading ? "Loading" : "Save"}
           </Button>
         </Box>
       </form>

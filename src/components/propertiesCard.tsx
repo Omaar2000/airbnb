@@ -75,7 +75,7 @@ export const Card: React.FC<CardProps> = ({
         <Button
           onClick={(e) => {
             e.stopPropagation(); // Prevent parent `onClick` from being triggered
-            navigate("/properties/editproperty");
+            navigate(`/properties/editproperty/${id}`);
           }}
           variant="contained"
           color="info"

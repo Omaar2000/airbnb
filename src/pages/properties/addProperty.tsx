@@ -59,11 +59,13 @@ const AddPropertyPage = () => {
     formData.append("description", description);
     formData.append("price", price.toString());
     formData.append("location", location);
-    images.forEach((image, index) => {
-      formData.append("images", image); // Append each image file
-    });
-    formData.append("user", userId); // Send userId instead of the entire user object
-    console.log("user", formData);
+
+    // Send images as an array
+    images.forEach((image) => formData.append("images", image));
+
+    formData.append("user_id", userId); // Send userId instead of the entire user object
+    console.log("FormData content", formData);
+
     // Send FormData to the postMultipart function
     await postMultipart(`${baseUrl}/properties`, formData);
 
@@ -170,24 +172,27 @@ const AddPropertyPage = () => {
               ref={fileRef}
             />
             {images.length > 0 ? (
-              <Box sx={{ display: "flex", alignItems: "start", mt: 2 }}>
+              <Box
+                sx={{ display: "flex", flexWrap: "wrap", gap: "1rem", mt: 2 }}
+              >
                 {images.map((image, index) => (
                   <Box key={index} sx={{ position: "relative" }}>
                     <img
                       src={URL.createObjectURL(image)}
                       alt="Preview"
                       style={{
-                        maxWidth: "500px",
-                        maxHeight: "500px",
-                        marginInlineStart: "2rem",
+                        width: "150px",
+                        height: "150px",
+                        objectFit: "cover",
+                        borderRadius: "8px",
                       }}
                     />
                     <IconButton
                       onClick={() => handleRemoveImage(index)}
                       sx={{
                         position: "absolute",
-                        right: "-40%",
-                        top: "-20%",
+                        top: "-10%",
+                        right: "-10%",
                         background: "white",
                         borderRadius: "50%",
                       }}
